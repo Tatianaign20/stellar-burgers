@@ -6,28 +6,29 @@ import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
+import ingredientSlice from '../../services/slices/ingredientSlice';
 
 export const ConstructorPage: FC = () => {
-  /** TODO: взять переменную из стора */
-  const isIngredientsLoading = false;
+	/** TODO: взять переменную из стора */
+	const isIngredientsLoading = false; //Реализовала в компоненте BurgerIngredients, если тут, то можно так: const isIngredientsLoading = useSelector(ingredientSlice.selectors.getLoadingSelector);
 
-  return (
-    <>
-      {isIngredientsLoading ? (
-        <Preloader />
-      ) : (
-        <main className={styles.containerMain}>
-          <h1
-            className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}
-          >
-            Соберите бургер
-          </h1>
-          <div className={`${styles.main} pl-5 pr-5`}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </div>
-        </main>
-      )}
-    </>
-  );
+	return (
+		<>
+			{isIngredientsLoading ? (
+				<Preloader />
+			) : (
+				<main className={styles.containerMain}>
+					<h1
+						className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}
+					>
+						Соберите бургер
+					</h1>
+					<div className={`${styles.main} pl-5 pr-5`}>
+						<BurgerIngredients />
+						<BurgerConstructor />
+					</div>
+				</main>
+			)}
+		</>
+	);
 };
