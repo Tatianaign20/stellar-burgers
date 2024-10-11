@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { submitOrder } from '../../services/slices/orderSlice';
 
 export const BurgerConstructor: FC = () => {
-	/** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
 	const constructorItemsIngredients = useSelector(
 		burgerSlice.selectors.getBurgerIngredientsSelector
 	);
@@ -23,7 +22,6 @@ export const BurgerConstructor: FC = () => {
 		bun: constructorItemsbun
 	};
 	const orderRequest = useSelector(orderSlice.selectors.getLoadingSelector);
-	// const orderRequest = false;
 	const orderModalData = useSelector(orderSlice.selectors.getOrderSelector);
 
 	const navigate = useNavigate();

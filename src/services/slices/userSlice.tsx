@@ -84,7 +84,6 @@ export const registerUser = createAsyncThunk(
 
 type TUserState = {
 	user: TUser;
-	// isUser: boolean;
 	isAuthenticated: boolean;
 	loading: boolean;
 	error?: string | null;

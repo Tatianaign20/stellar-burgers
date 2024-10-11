@@ -6,10 +6,9 @@ import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 import ingredientSlice from '../../services/slices/ingredientSlice';
 import { Preloader } from '../ui';
+import { fetchIngredients } from '../../services/slices/ingredientSlice';
 
 export const BurgerIngredients: FC = () => {
-	/** TODO: взять переменные из стора */
-
 	const ingredients = useSelector(
 		ingredientSlice.selectors.getIngredientsSelector
 	);
@@ -66,8 +65,6 @@ export const BurgerIngredients: FC = () => {
 	if (isError) {
 		return <div>Произошла ошибка при получении данных с сервера</div>;
 	}
-
-	// return null;
 
 	return (
 		<BurgerIngredientsUI

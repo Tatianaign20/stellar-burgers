@@ -26,7 +26,6 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
 				<Logo className='' />
 			</div>
 			<div className={styles.link_position_last}>
-				{/* Если user , то направляем в /profile, если нет, то в /login */}
 				<Link to={userName ? '/profile' : '/login'} className={styles.link}>
 					<ProfileIcon type={'primary'} />
 					<p className='text text_type_main-default ml-2'>

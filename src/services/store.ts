@@ -19,15 +19,10 @@ const rootReducer = combineReducers({
 	user: userSliceReducer,
 	order: orderSliceReducer,
 	orders: ordersSliceReducer
-}); // Заменить на импорт настоящего редьюсера
+});
 
 const store = configureStore({
 	reducer: rootReducer,
-	// middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-	//     serializableCheck: false,
-	//     immutableCheck: false,
-	//     thunk: true
-	// }),
 	devTools: process.env.NODE_ENV !== 'production'
 });
 

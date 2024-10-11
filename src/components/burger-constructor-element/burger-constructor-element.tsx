@@ -6,12 +6,6 @@ import burgerSlice from '../../services/slices/burgerSlice';
 
 export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
 	({ ingredient, index, totalItems }) => {
-		// const handleMoveDown = () => {};
-
-		// const handleMoveUp = () => {};
-
-		// const handleClose = () => {};
-
 		const dispatch = useDispatch();
 
 		const handleMoveDown = () => {

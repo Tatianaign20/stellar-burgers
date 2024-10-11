@@ -9,9 +9,7 @@ import { FC } from 'react';
 import ingredientSlice from '../../services/slices/ingredientSlice';
 
 export const ConstructorPage: FC = () => {
-	/** TODO: взять переменную из стора */
-	const isIngredientsLoading = false; //Реализовала в компоненте BurgerIngredients, если тут, то можно так: const isIngredientsLoading = useSelector(ingredientSlice.selectors.getLoadingSelector);
-
+	const isIngredientsLoading = false;
 	return (
 		<>
 			{isIngredientsLoading ? (
