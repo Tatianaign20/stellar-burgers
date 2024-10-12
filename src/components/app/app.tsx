@@ -33,12 +33,17 @@ import { AnyAction } from 'redux';
 import { getUser } from '../../services/slices/userSlice';
 import { TIngredient } from '@utils-types';
 import userSlice from 'src/services/slices/userSlice';
+import { ProtectedRoute, OnlyUnAuth, OnlyAuth } from '../protected-route';
+// import { checkUserAuth } from '../../services/actions';
+// import { OnlyAuth, OnlyUnAuth } from '../protected-route';
+
 
 function App() {
 	const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 	useEffect(() => {
 		dispatch(fetchIngredients());
 		dispatch(getUser());
+		// dispatch(checkUserAuth());
 	}, [dispatch]);
 
 	const location = useLocation();
@@ -53,12 +58,54 @@ function App() {
 			<Routes location={backgroundLocation || location}>
 				<Route path='/' element={<ConstructorPage />} />
 				<Route path='/feed' element={<Feed />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
-				<Route path='/forgot-password' element={<ForgotPassword />} />
-				<Route path='/reset-password' element={<ResetPassword />} />
-				<Route path='/profile' element={<Profile />} />
-				<Route path='/profile/orders' element={<ProfileOrders />} />
+				<Route
+					path='/login'
+					element={
+						<OnlyUnAuth>
+							<Login />
+						</OnlyUnAuth>
+					}
+				/>
+				<Route
+					path='/register'
+					element={
+						<OnlyUnAuth>
+							<Register />
+						</OnlyUnAuth>
+					}
+				/>
+				<Route
+					path='/forgot-password'
+					element={
+						<OnlyUnAuth>
+							<ForgotPassword />
+						</OnlyUnAuth>
+					}
+				/>
+				<Route
+					path='/reset-password'
+					element={
+						<OnlyUnAuth>
+							<ResetPassword />
+						</OnlyUnAuth>
+					}
+				/>
+				<Route
+					path='/profile'
+					element={
+						<OnlyAuth>
+							<Profile />
+						</OnlyAuth>
+					}
+				/>
+				<Route
+					path='/profile/orders'
+					element={
+						<OnlyAuth>
+							<ProfileOrders />
+						</OnlyAuth>
+					}
+				/>
 				<Route path='*' element={<NotFound404 />} />
 				<Route path='/feed/:number' element={<OrderInfo />} />
 				<Route path='/ingredients/:id' element={<IngredientDetails />} />
@@ -85,9 +132,11 @@ function App() {
 					<Route
 						path='/profile/orders/:number'
 						element={
+							<OnlyAuth>
 							<Modal title='Заказ' onClose={handleCloseModal}>
 								<OrderInfo />
 							</Modal>
+							</OnlyAuth>
 						}
 					/>
 				</Routes>

@@ -2,6 +2,7 @@ import {
 	createSlice,
 	createAsyncThunk,
 	PayloadAction,
+	createAction,
 	createSelector,
 	isAction
 } from '@reduxjs/toolkit';
@@ -18,6 +19,8 @@ import {
 } from '../../utils/burger-api';
 
 import { setCookie, deleteCookie } from '../../utils/cookie';
+
+// import { setUser } from '../actions';
 
 export const getUser = createAsyncThunk(
 	'user/get',
@@ -82,9 +85,12 @@ export const registerUser = createAsyncThunk(
 	}
 );
 
+
+
 type TUserState = {
 	user: TUser;
 	isAuthenticated: boolean;
+	isAuthChecked: boolean;
 	loading: boolean;
 	error?: string | null;
 };
@@ -95,6 +101,7 @@ const initialState: TUserState = {
 		name: ''
 	},
 	isAuthenticated: false,
+	isAuthChecked: false,
 	loading: false,
 	error: ''
 };
@@ -102,75 +109,92 @@ const initialState: TUserState = {
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,
-	reducers: {},
+	reducers: {
+		setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
+            state.isAuthChecked = action.payload;
+        }
+	},
 	extraReducers(builder) {
 		builder
 			.addCase(getUser.pending, (state) => {
 				state.isAuthenticated = false;
+				state.isAuthChecked = false;
 				state.loading = true;
 				state.error = null;
 			})
 			.addCase(getUser.fulfilled, (state, action) => {
 				state.user = action.payload.user;
 				state.isAuthenticated = true;
+				state.isAuthChecked = true;
 				state.loading = false;
 				state.error = null;
 			})
 			.addCase(getUser.rejected, (state) => {
 				state.isAuthenticated = false;
+				state.isAuthChecked = true;
 				state.loading = false;
 				state.error = 'Ошибка при получении данных пользователя';
 			})
 			.addCase(updateUser.pending, (state) => {
 				state.isAuthenticated = false;
+				state.isAuthChecked = false;
 				state.loading = true;
 				state.error = null;
 			})
 			.addCase(updateUser.fulfilled, (state, action) => {
 				state.isAuthenticated = true;
+				state.isAuthChecked = true;
 				state.user = action.payload.user;
 				state.loading = false;
 				state.error = null;
 			})
 			.addCase(updateUser.rejected, (state) => {
-				state.isAuthenticated = false;
+				// state.isAuthenticated = false;
+				// state.isAuthChecked = true;
 				state.loading = false;
 				state.error = 'Ошибка при обновлении данных пользователя';
 			})
 			.addCase(loginUser.pending, (state) => {
 				state.isAuthenticated = false;
+				state.isAuthChecked = false;
 				state.loading = true;
 				state.error = null;
 			})
 			.addCase(loginUser.fulfilled, (state, action) => {
 				state.isAuthenticated = true;
+				state.isAuthChecked = true;
 				state.user = action.payload;
 				state.loading = false;
 				state.error = null;
 			})
 			.addCase(loginUser.rejected, (state) => {
 				state.isAuthenticated = false;
+				state.isAuthChecked = true;
 				state.loading = false;
 				state.error = 'Неверные данные пользователя';
 			})
 			.addCase(registerUser.pending, (state) => {
 				state.isAuthenticated = false;
+				state.isAuthChecked = false;
 				state.loading = true;
 				state.error = null;
 			})
 			.addCase(registerUser.fulfilled, (state, action) => {
 				state.isAuthenticated = true;
+				state.isAuthChecked = true;
 				state.user = action.payload.user;
 				state.loading = false;
 				state.error = null;
 			})
 			.addCase(registerUser.rejected, (state) => {
 				state.isAuthenticated = false;
+				state.isAuthChecked = true;
 				state.loading = false;
 				state.error = 'Неверные данные пользователя';
 			})
 			.addCase(logoutUser.pending, (state) => {
 				state.isAuthenticated = true;
+				state.isAuthChecked = true;
 				state.loading = true;
 				state.error = null;
 			})
@@ -180,17 +204,29 @@ export const userSlice = createSlice({
 					email: '',
 					name: ''
 				};
+				state.isAuthChecked = true;
 				state.loading = false;
 				state.error = null;
 			})
 			.addCase(logoutUser.rejected, (state) => {
 				state.isAuthenticated = true;
+				state.isAuthChecked = true;
 				state.loading = false;
 				state.error = 'Ошибка при выходе из аккаунта';
-			});
+			})
+
+
+
+			// .addCase(setUser, (state, action) => {
+            //     state.user = action.payload;
+            // })
+
+
+
 	},
 	selectors: {
 		getIsAuthenticatedSelector: (state) => state.isAuthenticated,
+		getIsAuthCheckedSelector: (state) => state.isAuthChecked,
 		getUserSelector: (state) => state.user,
 		getLoadingSelector: (state) => state.loading,
 		getErrorSelector: (state) => state.error
@@ -199,3 +235,6 @@ export const userSlice = createSlice({
 
 export const userSliceReducer = userSlice.reducer;
 export default userSlice;
+export const {
+	setIsAuthChecked
+} = userSlice.actions;
