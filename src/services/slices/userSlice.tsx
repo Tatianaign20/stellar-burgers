@@ -20,8 +20,6 @@ import {
 
 import { setCookie, deleteCookie } from '../../utils/cookie';
 
-// import { setUser } from '../actions';
-
 export const getUser = createAsyncThunk(
 	'user/get',
 	async (_, { rejectWithValue }) => {
@@ -85,10 +83,8 @@ export const registerUser = createAsyncThunk(
 	}
 );
 
-
-
 type TUserState = {
-	user: TUser;
+	user: TUser | null;
 	isAuthenticated: boolean;
 	isAuthChecked: boolean;
 	loading: boolean;
@@ -96,10 +92,7 @@ type TUserState = {
 };
 
 const initialState: TUserState = {
-	user: {
-		email: '',
-		name: ''
-	},
+	user: null,
 	isAuthenticated: false,
 	isAuthChecked: false,
 	loading: false,
@@ -111,8 +104,8 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
-            state.isAuthChecked = action.payload;
-        }
+			state.isAuthChecked = action.payload;
+		}
 	},
 	extraReducers(builder) {
 		builder
@@ -149,8 +142,6 @@ export const userSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(updateUser.rejected, (state) => {
-				// state.isAuthenticated = false;
-				// state.isAuthChecked = true;
 				state.loading = false;
 				state.error = 'Ошибка при обновлении данных пользователя';
 			})
@@ -213,16 +204,7 @@ export const userSlice = createSlice({
 				state.isAuthChecked = true;
 				state.loading = false;
 				state.error = 'Ошибка при выходе из аккаунта';
-			})
-
-
-
-			// .addCase(setUser, (state, action) => {
-            //     state.user = action.payload;
-            // })
-
-
-
+			});
 	},
 	selectors: {
 		getIsAuthenticatedSelector: (state) => state.isAuthenticated,
@@ -235,6 +217,4 @@ export const userSlice = createSlice({
 
 export const userSliceReducer = userSlice.reducer;
 export default userSlice;
-export const {
-	setIsAuthChecked
-} = userSlice.actions;
+export const { setIsAuthChecked } = userSlice.actions;

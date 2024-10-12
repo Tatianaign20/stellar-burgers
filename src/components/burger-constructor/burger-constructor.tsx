@@ -28,7 +28,7 @@ export const BurgerConstructor: FC = () => {
 	const dispatch = useDispatch();
 
 	const onOrderClick = () => {
-		if (!isAuthenticated && !user.email) {
+		if (!user) {
 			navigate('/login');
 		}
 		if (!constructorItems.bun || orderRequest) return;
@@ -58,8 +58,6 @@ export const BurgerConstructor: FC = () => {
 			),
 		[constructorItems]
 	);
-
-	// return null;
 
 	return (
 		<BurgerConstructorUI

@@ -10,7 +10,6 @@ import { NotFound404 } from '@pages';
 import { Modal } from '@components';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
-import { BurgerIngredients, BurgerConstructor } from '@components';
 
 import '../../index.css';
 import styles from './app.module.css';
@@ -34,16 +33,12 @@ import { getUser } from '../../services/slices/userSlice';
 import { TIngredient } from '@utils-types';
 import userSlice from 'src/services/slices/userSlice';
 import { ProtectedRoute, OnlyUnAuth, OnlyAuth } from '../protected-route';
-// import { checkUserAuth } from '../../services/actions';
-// import { OnlyAuth, OnlyUnAuth } from '../protected-route';
-
 
 function App() {
 	const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 	useEffect(() => {
 		dispatch(fetchIngredients());
 		dispatch(getUser());
-		// dispatch(checkUserAuth());
 	}, [dispatch]);
 
 	const location = useLocation();
@@ -133,9 +128,9 @@ function App() {
 						path='/profile/orders/:number'
 						element={
 							<OnlyAuth>
-							<Modal title='Заказ' onClose={handleCloseModal}>
-								<OrderInfo />
-							</Modal>
+								<Modal title='Заказ' onClose={handleCloseModal}>
+									<OrderInfo />
+								</Modal>
 							</OnlyAuth>
 						}
 					/>
