@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MDY4Njg4MTNhMmI3MDAxYzhmMGVkZCIsImlhdCI6MTcyOTk0MTQ2NiwiZXhwIjoxNzI5OTQyNjY2fQ.yvWaQmfFoFw-72iFUMdnB02zbhv5BujRktlJM2-9Law",
+    "refreshToken": "91785daaef158a55c63200b7650320eb4fe8efac901961c76f4f3dc6aa25645fe01af0564854a839",
+    "user": {
+        "email": "tania_update@ya.ru",
+        "name": "Таня"
+    }
+}

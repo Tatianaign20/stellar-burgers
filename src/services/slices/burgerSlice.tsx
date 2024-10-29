@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 
-type TBurgerState = {
+export type TBurgerState = {
 	burgerIngredients: TConstructorIngredient[];
 	bun: TConstructorIngredient | null;
 };
@@ -65,3 +65,4 @@ export const burgerSliceReducer = burgerSlice.reducer;
 export const { getBurgerIngredientsSelector, getBunSelector } =
 	burgerSlice.selectors;
 export default burgerSlice;
+export const burgerSliceInitialState = initialState;

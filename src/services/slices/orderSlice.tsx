@@ -90,3 +90,4 @@ const orderSlice = createSlice({
 
 export const orderSliceReducer = orderSlice.reducer;
 export default orderSlice;
+export const orderSliceInitialState = initialState;

@@ -52,3 +52,4 @@ export const ordersSlice = createSlice({
 
 export const ordersSliceReducer = ordersSlice.reducer;
 export default ordersSlice;
+export const ordersSliceInitialState = initialState;
