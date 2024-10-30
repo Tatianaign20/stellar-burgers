@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import { getOrderByNumber } from '../../services/slices/orderSlice';
 
 export const OrderInfo: FC = () => {
-	const orderData = useSelector(orderSlice.selectors.getOrderSelector);
+	const orderData = useSelector(orderSlice.selectors.getOrderByNumberSelector);
 	const id = useParams().number;
 	const dispatch = useDispatch();
 

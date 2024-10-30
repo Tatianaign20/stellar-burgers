@@ -4,10 +4,10 @@ import { deleteCookie, setCookie } from '../../src/utils/cookie';
 describe('проверяем бургер конструктор', function() {
 
     beforeEach(function () {
-        // Перехваты запроса 'api/ingredients’,  'api/user'
+        // Перехваты запроса
         cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json'});
         cy.intercept('GET', 'api/auth/user', { fixture: 'user.json' });
-
+        cy.intercept('POST', 'api/orders', { fixture: 'order.json' });
       });
     
     it('проверка действий с модальным окном для простмотра деталей ингредиента', () => {
@@ -16,7 +16,7 @@ describe('проверяем бургер конструктор', function() {
         cy.get('h3').contains('Булки').next('ul').find('li').first().click(); //клик по первой из списка булке "Краторная булка N-200i"
         cy.get('#modals').contains("Детали ингредиента").should('exist');
         cy.get('h3').contains('Краторная булка N-200i').should('exist'); //проверка названия булки в модальном окне
-        cy.get('#modals').contains("Детали ингредиента").next('button').click();
+        cy.get('#modals').find('button').click();
         cy.get('#modals').contains("Детали ингредиента").should('not.exist');
       });
 
@@ -56,7 +56,6 @@ describe('проверяем бургер конструктор', function() {
         cy.get('h3').contains('Соусы').next('ul').find('li').eq(1).contains('Добавить').click();
         cy.get('h3').contains('Соусы').next('ul').find('li').eq(1).contains('1');
         cy.get('div').contains('Оформить заказ').click();
-        cy.intercept('POST', 'api/orders', { fixture: 'order.json' }); // Перехват запроса 'api/orders'
         cy.get('#modals').should('exist');
         cy.get('#modals').contains('идентификатор заказа').should('exist');
         cy.get('h2').contains('57655').should('exist');
@@ -65,6 +64,11 @@ describe('проверяем бургер конструктор', function() {
         cy.get('div').contains('Выберите булки').should('exist');
         cy.get('div').contains('Выберите начинку').should('exist');
     });
+    
+    afterEach(function () {
+      deleteCookie('accessToken');
+      localStorage.removeItem('refreshToken');
+  });
     });
 
 

@@ -63,6 +63,8 @@ export const logoutUser = createAsyncThunk(
 			return rejectWithValue(reply);
 		}
 		deleteCookie('accessToken');
+		localStorage.removeItem('refreshToken');
+		window.location.reload();
 	}
 );
 

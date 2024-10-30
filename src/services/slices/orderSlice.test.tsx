@@ -1,3 +1,4 @@
+import { orderBurgerApi } from '@api';
 import {
 	submitOrder,
 	getOrderByNumber,
@@ -34,7 +35,8 @@ describe('проверки для orderSlice', () => {
 		expect(newState).toEqual({
 			order: null,
 			loading: true,
-			error: null
+			error: null,
+			orderGetByNumber: null
 		});
 	});
 
@@ -94,7 +96,7 @@ describe('проверки для orderSlice', () => {
 			undefined,
 			getOrderByNumber.fulfilled(testOrders, '', 0)
 		);
-		expect(newState.order).toEqual(testOrders.orders[0]);
+		expect(newState.orderGetByNumber).toEqual(testOrders.orders[0]);
 		expect(newState.loading).toEqual(false);
 		expect(newState.error).toEqual(null);
 	});
@@ -104,7 +106,7 @@ describe('проверки для orderSlice', () => {
 			undefined,
 			getOrderByNumber.rejected(new Error('Error message'), '', 0)
 		);
-		expect(newState.order).toEqual(null);
+		expect(newState.orderGetByNumber).toEqual(null);
 		expect(newState.loading).toEqual(false);
 		expect(newState.error).toEqual('Ошибка');
 	});
@@ -114,6 +116,7 @@ describe('проверка начального состояния для orderS
 	it('проверка на соответствие начальному состоянию', () => {
 		expect(orderSliceInitialState).toEqual({
 			order: null,
+			orderGetByNumber: null,
 			loading: false,
 			error: null
 		});

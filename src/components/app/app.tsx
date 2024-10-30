@@ -111,7 +111,7 @@ function App() {
 					<Route
 						path='/feed/:number'
 						element={
-							<Modal title='Информация о заказе' onClose={handleCloseModal}>
+							<Modal title='' onClose={handleCloseModal}>
 								<OrderInfo />
 							</Modal>
 						}
@@ -119,7 +119,7 @@ function App() {
 					<Route
 						path='/ingredients/:id'
 						element={
-							<Modal title='Детали ингредиента' onClose={handleCloseModal}>
+							<Modal title='' onClose={handleCloseModal}>
 								<IngredientDetails />
 							</Modal>
 						}
@@ -128,7 +128,7 @@ function App() {
 						path='/profile/orders/:number'
 						element={
 							<OnlyAuth>
-								<Modal title='Заказ' onClose={handleCloseModal}>
+								<Modal title='' onClose={handleCloseModal}>
 									<OrderInfo />
 								</Modal>
 							</OnlyAuth>

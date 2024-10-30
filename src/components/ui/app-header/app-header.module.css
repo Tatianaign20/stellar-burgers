@@ -19,6 +19,9 @@
   text-decoration: none;
   color: var(--text-inactive-color);
 }
+.link:focus {
+  color: var(--text-primary-color);
+}
 
 .link_active {
   color: var(--text-primary-color);
@@ -34,4 +37,12 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
+}
+
+.icon {
+  fill: var(--text-inactive-color);
+}
+
+.link:focus .icon {
+  fill: var(--text-primary-color);
 }

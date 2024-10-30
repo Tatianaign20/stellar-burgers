@@ -7,13 +7,19 @@ import {
 	ingredientSliceReducer,
 	ingredientSliceInitialState
 } from './slices/ingredientSlice';
-import { feedSliceReducer, feedSliceInitialState } from './slices/feedSlice';
+import {
+	feedSliceReducer,
+	feedSliceInitialState,
+	initialState
+} from './slices/feedSlice';
 import { userSliceReducer, userSliceInitialState } from './slices/userSlice';
 import {
 	ordersSliceReducer,
 	ordersSliceInitialState
 } from './slices/ordersSlice';
 import { orderSliceReducer, orderSliceInitialState } from './slices/orderSlice';
+import store from './store';
+import { rootReducer } from './store';
 
 describe('тесты проверяют корректность инициализации состояний перед началом работы приложения', () => {
 	test('инициализация burgerSlice', () => {
@@ -56,5 +62,24 @@ describe('тесты проверяют корректность инициал�
 			type: 'UNKNOWN_ACTION'
 		});
 		expect(initialState).toEqual(orderSliceInitialState);
+	});
+});
+
+describe('проверка для корневого редьюсера', () => {
+	const initialState = {
+		ingredients: ingredientSliceInitialState,
+		burgers: burgerSliceInitialState,
+		feed: feedSliceInitialState,
+		user: userSliceInitialState,
+		order: orderSliceInitialState,
+		orders: ordersSliceInitialState
+	};
+	test('проверка initial state', () => {
+		expect(store.getState()).toEqual(initialState);
+	});
+
+	test('проверка rootReducer', () => {
+		const state = rootReducer(undefined, { type: 'UNKNOW_ACTION' });
+		expect(state).toEqual(initialState);
 	});
 });
