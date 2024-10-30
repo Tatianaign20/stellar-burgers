@@ -12,6 +12,10 @@
 
 .header {
   margin: 0;
+  font-family: 'Jet Brains Mono', sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: bold;
 }
 
 .img_wrap {
@@ -73,4 +77,15 @@
 }
 .total {
   margin-left: auto;
+}
+
+.number {
+  font-size: 28px;
+  line-height: 24px;
+  font-family: 'Iceland';
+  text-align: left;
+  padding-bottom: 10px;
+  padding-top: 5px;
+  text-align: center;
+  /* margin-top: -40px; */
 }

@@ -63,6 +63,8 @@ export const logoutUser = createAsyncThunk(
 			return rejectWithValue(reply);
 		}
 		deleteCookie('accessToken');
+		localStorage.removeItem('refreshToken');
+		window.location.reload();
 	}
 );
 
@@ -218,3 +220,4 @@ export const userSlice = createSlice({
 export const userSliceReducer = userSlice.reducer;
 export default userSlice;
 export const { setIsAuthChecked } = userSlice.actions;
+export const userSliceInitialState = initialState;

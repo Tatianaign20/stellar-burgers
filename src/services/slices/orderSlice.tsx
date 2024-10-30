@@ -31,12 +31,14 @@ export const getOrderByNumber = createAsyncThunk(
 
 type TOrderState = {
 	order: TOrder | null;
+	orderGetByNumber: TOrder | null;
 	loading: boolean;
 	error?: string | null;
 };
 
 const initialState: TOrderState = {
 	order: null,
+	orderGetByNumber: null,
 	loading: false,
 	error: null
 };
@@ -71,7 +73,7 @@ const orderSlice = createSlice({
 			})
 			.addCase(getOrderByNumber.fulfilled, (state, action) => {
 				state.loading = false;
-				state.order = action.payload.orders[0];
+				state.orderGetByNumber = action.payload.orders[0];
 				state.error = null;
 			})
 			.addCase(getOrderByNumber.rejected, (state, action) => {
@@ -83,10 +85,11 @@ const orderSlice = createSlice({
 	selectors: {
 		getOrderSelector: (state) => state.order,
 		getLoadingSelector: (state) => state.loading,
-		getOrderByNumberSelector: (state) => state.order,
+		getOrderByNumberSelector: (state) => state.orderGetByNumber,
 		getErrorSelector: (state) => state.error
 	}
 });
 
 export const orderSliceReducer = orderSlice.reducer;
 export default orderSlice;
+export const orderSliceInitialState = initialState;

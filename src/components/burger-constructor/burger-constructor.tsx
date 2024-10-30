@@ -38,7 +38,8 @@ export const BurgerConstructor: FC = () => {
 			bunId,
 			...constructorItems.ingredients.map(
 				(ingredient: TConstructorIngredient) => ingredient._id
-			)
+			),
+			bunId
 		];
 
 		dispatch(submitOrder(ingredientsOrder));
